@@ -18,8 +18,7 @@ const useStyles = createUseStyles({
       }
    }
 })
-
-const Button = ({ onClick,  color, name }) => {
+const Button = ({ variant, onClick, color, name }) => {
    const classes = useStyles({ color})
 
    return (
