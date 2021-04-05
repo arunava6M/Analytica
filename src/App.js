@@ -31,23 +31,23 @@ const useStyles = createUseStyles({
   }
 })
 
-const routes = (
-  <Switch>
-    <Route exact path="/" component={Dashboard} />
-    <Route path="/account" component={InProgress} />
-    <Route path="/health" component={InProgress} />
-    <Route path="/about" component={InProgress} />
-    <Route path="/notification" component={InProgress} />
-    <Route component={NotFound} />
-  </Switch>
-)
-
 function App() {
   const isSmallScreen = useViewport('(max-width: 760px)')
   const classes = useStyles({isSmallScreen})
   const [sidebarOpen, setSidebarOpen] = useState(false)
   
   const toggleSideBar = () => setSidebarOpen(!sidebarOpen)
+
+  const routes = (
+    <Switch>
+      <Route exact path="/" component={() => <Dashboard sidebarOpen={sidebarOpen} />} />
+      <Route path="/account" component={InProgress} />
+      <Route path="/health" component={InProgress} />
+      <Route path="/about" component={InProgress} />
+      <Route path="/notification" component={InProgress} />
+      <Route component={NotFound} />
+    </Switch>
+  )
 
   return (
     <Router>

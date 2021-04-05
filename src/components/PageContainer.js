@@ -5,6 +5,7 @@ import Header from '../components/Header'
 const useStyles= createUseStyles({
    commonPageContainer: {
       maxHeight: '100%',
+      maxWidth: '100%',
       flex: 4
    }
 })

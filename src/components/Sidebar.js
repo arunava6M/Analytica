@@ -18,7 +18,8 @@ const typography = {
 
 const useStyles = createUseStyles({
    sieBarContainer: {
-      flex: ({open, isSmallScreen}) => isSmallScreen ? 0 : (open ? 1 : 0.2),
+      flex: ({open, isSmallScreen}) => isSmallScreen ? 0 : (open ? 1 : 0.6),
+      minWidth: '50px',
       backgroundColor: '#3ca5c2',
       boxShadow: '5px 0px 28px -10px rgba(0,0,0,0.36)',
       transition: 'all 0.2s ease 0s'
@@ -40,7 +41,7 @@ const useStyles = createUseStyles({
    links: {
       display: 'flex',
       flexDirection: ({isSmallScreen}) => isSmallScreen ? 'row' : 'column',
-      paddingLeft: '20px',
+      alignItems: 'center',
       justifyContent: 'space-around'
    },
 
@@ -49,7 +50,6 @@ const useStyles = createUseStyles({
       maxWidth: '100px',
       display: 'flex',
       flexDirection: 'row',
-      // justifyContent: 'flex-start',
       cursor: 'pointer',
       color: 'white',
       textDecoration: 'none',
@@ -74,18 +74,16 @@ const Sidebar = ({ open }) => {
 
    const sideBarItemRenderer = () => {
       return sidebarItems.map( ({icon, title, link}) => (
-         // <div className={classes.itemContainer}>
-            <Link to={link} className={classes.itemContainer}>
-               <Grouped>
-                  <div className={classes.icon}>{icon}</div>
-                  {!isSmallScreen && open &&
-                     <Padder left={30}>
-                        <Text color="white" variant="medium">{title}</Text>
-                     </Padder>
-                  }
-               </Grouped>
-            </Link>
-         // </div>
+         <Link to={link} className={classes.itemContainer}>
+            <Grouped>
+               <div className={classes.icon}>{icon}</div>
+               {!isSmallScreen && open &&
+                  <Padder left={30}>
+                     <Text color="white" variant="medium">{title}</Text>
+                  </Padder>
+               }
+            </Grouped>
+         </Link>
       ))
    }
 

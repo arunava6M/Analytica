@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss'
-import { Line, Bar, Doughnut  } from 'react-chartjs-2'
+import { Line, Doughnut, Pie  } from 'react-chartjs-2'
 import { useState } from 'react'
 
 import InfoCard from '../components/InfoCard'
@@ -12,6 +12,7 @@ import useViewport from '../hooks/useViewPort'
 const useStyles = createUseStyles({
    gridLayout: {
       height: '80%',
+      width: '100%',
       display: 'grid',
       gridTemplateColumns: '1fr 1fr 1fr 1fr',
       gridTemplateRows: '1fr 1fr',
@@ -27,7 +28,6 @@ const useStyles = createUseStyles({
             'infoCard1'
             'infoCard2'
             'infoCard3'
-            'infoCard4'
             'infoCard5'`
       }
    },
@@ -133,7 +133,7 @@ const activeData = {
 
 
 
-const Dashboard = () => {
+const Dashboard = ({sidebarOpen}) => {
    const classes = useStyles()
    const [ selectedCAData, setSelectedCAData ] = useState(confirmData)
    const [ selectedDRData, setSelectedDRData ] = useState(recoveredData)
@@ -264,7 +264,32 @@ const Dashboard = () => {
                   }}
                /> 
             </InfoCard>
-            <InfoCard gridArea="infoCard4"/>
+            {!sidebarOpen && !isSmallScreen &&
+               <InfoCard justifyContent="flexStart" gridArea="infoCard4">
+                  <Text bold variant="regular" color="#8c9196">What to do to keep yourself and others safe from COVID-19</Text>
+                  <ul>
+                     <li><Text color="#8c9196" >Maintain <b>at least a 1-metre distance </b> between yourself and others to reduce your risk of infection when they <b>cough, sneeze or speak</b>. Maintain an even greater distance between yourself and others when indoors.</Text></li>
+                     <br />
+                     <li><Text color="#8c9196"><b>Make wearing a mask a normal part of being around other people.</b> The appropriate use, storage and cleaning or disposal are essential to make masks as effective as possible.</Text></li>
+                     </ul>
+                     <Pie 
+                        data={{
+                           labels: [ 'Maharastra', 'Kerala', 'Karnataka', 'Andhra Pradesh', 'Tamil Nadu'],
+                           datasets: [topFiveStateRecoveredData]
+                        }}
+                        options={{
+                           ...options,
+                           legend: {
+                              display: true,
+                              position: 'right',
+                           }
+                        }}
+                     />
+                     <ul>
+                        <li><Text color="#8c9196" >Maintain <b>at least a 1-metre distance </b> between yourself and others to reduce your risk of infection when they <b>cough, sneeze or speak</b>. Maintain an even greater distance between yourself and others when indoors.</Text></li>
+                     </ul>
+               </InfoCard>
+            }
             <InfoCard gridArea="infoCard5">
                <Text color={vaccinatedData.bordercolor} bold>Vaccine doses administered</Text>
                <Text color={vaccinatedData.bordercolor} bold variant="big">40,83,100</Text>
